@@ -133,19 +133,19 @@ const resendEmail = async () => {
         </View>
       </View>
 
-      <View className="mt-4">
+      <View className="mt-4 bg-white rounded-[15px]">
         <Input
           type="text"
           placeholder="Search House"
-          variant="filled"
-          py="0"
+          // variant="filled"
+          // py="0"
           borderRadius="15px"
           style={{fontFamily: 'montAlt'}}
           className="bg-white text-lg"
           InputRightElement={
             <Image
               source={require("@/assets/images/setting.png")}
-              resizeMode="cover"
+              resizeMode="contain"
               // className="w-6 h-6 mr-3"
             />
           }

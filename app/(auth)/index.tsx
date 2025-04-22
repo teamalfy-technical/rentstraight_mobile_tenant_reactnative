@@ -31,14 +31,14 @@ const SignIn = () => {
     // router.push('/(tabs)')
   };
   return (
-    <SafeAreaView className="flex-1 bg-[#41414138]">
+    <View className="flex-1">
         <ImageBackground
           source={bg}
           className="flex-1 w-full absolute z-0 right-[-30%] top-14 h-[90%] bg-right"
           resizeMode="cover"
         />
       <BlurView intensity={30} tint="regular" style = {{ flex: 1}}>
-        <View className="flex-1 bg-opacity-30 px-5">
+        <View className="flex-1 bg-opacity-30 px-5 mt-10">
           <TopBar />
           <KeyboardAvoidingView
             className="flex-1 h-screen"
@@ -50,13 +50,13 @@ const SignIn = () => {
                 <View>
                   <Text
                     style={{ fontFamily: "montAlt" }}
-                    className="text-[64px]"
+                    className="text-[60px]"
                   >
                     Elevate Your
                   </Text>
                   <Text
                     style={{ fontFamily: "montAlt" }}
-                    className="text-[#F47D7B] text-[64px]"
+                    className="text-[#F47D7B] text-[60px]"
                   >
                     Experience
                   </Text>
@@ -169,7 +169,7 @@ const SignIn = () => {
           loading={loading}
         />
       )}
-    </SafeAreaView>
+    </View>
   );
 };
 

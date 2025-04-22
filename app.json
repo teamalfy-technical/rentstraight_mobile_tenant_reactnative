@@ -15,7 +15,8 @@
       "width": 200
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.teamalfyweb.rentstraighttenant"
     },
     "android": {
       "adaptiveIcon": {
@@ -40,6 +41,19 @@
           "photosPermission": "The app accesses your photos to let you share them with your friends."
         }
       ]
+      // [
+      //   "expo-splash-screen",
+      //   {
+      //     "backgroundColor": "#232323",
+      //     "image": "./assets/images/logo.png",
+      //     "dark": {
+      //       "image": "./assets/images/logo.png",
+      //       "backgroundColor": "#fff"
+      //     },
+      //     "imageWidth": 200,
+      //     "resizeMode": "contain"
+      //   }
+      // ]
     ],
     "assetBundlePatterns": [
       "assets/*"
