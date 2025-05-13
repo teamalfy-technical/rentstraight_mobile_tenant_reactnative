@@ -1,36 +1,71 @@
 {
   "expo": {
-    "name": "rentstraight_mobile_tenant_reactnative",
-    "slug": "rentstraight_mobile_tenant_reactnative",
+    "name": "Rentstraight Tenant",
+    "slug": "rentstraight-tenant",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "splash": {
-      "image": "./assets/images/splash.png",
+      "image": "./assets/images/logo.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#ffffff",
+      "height": 200,
+      "width": 200
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.teamalfyweb.rentstraighttenant"
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "foregroundImage": "./assets/images/icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "permissions": [
+        "android.permission.RECORD_AUDIO"
+      ],
+      "package": "com.teamalfyweb.rentstraighttenant"
     },
     "web": {
       "bundler": "metro",
       "output": "static",
-      "favicon": "./assets/images/favicon.png"
+      "favicon": "./assets/images/logo.png"
     },
     "plugins": [
-      "expo-router"
+      "expo-router",
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "The app accesses your photos to let you share them with your friends."
+        }
+      ]
+      // [
+      //   "expo-splash-screen",
+      //   {
+      //     "backgroundColor": "#232323",
+      //     "image": "./assets/images/logo.png",
+      //     "dark": {
+      //       "image": "./assets/images/logo.png",
+      //       "backgroundColor": "#fff"
+      //     },
+      //     "imageWidth": 200,
+      //     "resizeMode": "contain"
+      //   }
+      // ]
+    ],
+    "assetBundlePatterns": [
+      "assets/*"
     ],
     "experiments": {
       "typedRoutes": true
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "c48032ee-82a7-461c-a445-cae19f945858"
+      }
+    },
+    "owner": "teamalfyweb"
   }
 }
