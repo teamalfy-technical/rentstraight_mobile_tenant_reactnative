@@ -1,4 +1,4 @@
-import { baseurl } from "@/app/api/baseurl";
+import { baseurl, publicUrl } from "@/app/api/baseurl";
 import axios from "axios";
 import { createContext, ReactNode, useContext, useEffect, useState } from "react";
 import { Alert } from "react-native";
@@ -21,6 +21,7 @@ type AuthContextProps = {
   login: (email: string, password: string) => Promise<void>;
   logout: () => void;
   updateUser: (userData: Partial<userProps>) => Promise<void>;
+  setUser: React.Dispatch<React.SetStateAction<userProps | null>>;
 };
 
 const AuthContext = createContext<AuthContextProps | undefined>(undefined);
@@ -54,7 +55,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
   const login = async (email: string, password: string) => {
     setLoading(true);
     try {
-      const res = await axios.post(`${baseurl}/login/`, {
+      const res = await axios.post(`${publicUrl}/tenant/login/`, {
         email,
         password,
       });
@@ -119,7 +120,8 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
     loading,
     token,
     user,
-    updateUser
+    updateUser,
+    setUser,
   };
 
   return (

@@ -4,15 +4,14 @@
     "slug": "rentstraight-tenant",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
-    "scheme": "myapp",
+    "icon": "./assets/images/logo.png",
+    "scheme": "rentstraighttenant",
     "userInterfaceStyle": "automatic",
     "splash": {
-      "image": "./assets/images/logo.png",
+      "image": "./assets/images/icon.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff",
-      "height": 200,
-      "width": 200
+      "backgroundColor": "#F47D7B",
+      "androidStatusBarColor": "#F47D7B"
     },
     "ios": {
       "supportsTablet": true,
@@ -21,7 +20,7 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/icon.png",
-        "backgroundColor": "#ffffff"
+        "backgroundColor": "#F47D7B"
       },
       "permissions": [
         "android.permission.RECORD_AUDIO"
@@ -31,7 +30,7 @@
     "web": {
       "bundler": "metro",
       "output": "static",
-      "favicon": "./assets/images/logo.png"
+      "favicon": "./assets/images/icon.png"
     },
     "plugins": [
       "expo-router",
@@ -40,20 +39,9 @@
         {
           "photosPermission": "The app accesses your photos to let you share them with your friends."
         }
-      ]
-      // [
-      //   "expo-splash-screen",
-      //   {
-      //     "backgroundColor": "#232323",
-      //     "image": "./assets/images/logo.png",
-      //     "dark": {
-      //       "image": "./assets/images/logo.png",
-      //       "backgroundColor": "#fff"
-      //     },
-      //     "imageWidth": 200,
-      //     "resizeMode": "contain"
-      //   }
-      // ]
+      ],
+      "expo-font",
+      "expo-web-browser"
     ],
     "assetBundlePatterns": [
       "assets/*"

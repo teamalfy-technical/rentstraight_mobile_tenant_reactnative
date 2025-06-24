@@ -12,7 +12,7 @@ import {
 import React, { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import TopBar from "@/components/Topbar";
-import OtpInput from "react-native-input-otp";
+import { OtpInput } from "react-native-otp-entry";
 import CustomButton from "@/components/CustomButton";
 import { FontAwesome } from "@expo/vector-icons";
 import { router, useLocalSearchParams } from "expo-router";
@@ -22,13 +22,15 @@ import { Formik, FormikValues } from "formik";
 import axios from "axios";
 import { baseurl } from "@/app/api/baseurl";
 import BottomModal from "@/components/BottomModal";
+import { useAuth } from "@/context/AuthContext";
 
 const otp = () => {
   const [loading, setLoading] = useState(false);
-  const params = useLocalSearchParams();
+  // const params = useLocalSearchParams();
 
-  const res = JSON.parse(params?.res);
-  const user = JSON.parse(params?.user);
+  // const res = JSON.parse(params?.res);
+  // const user = JSON.parse(params?.user);
+  const { user: res } = useAuth();
   const name = res?.full_name;
   console.log(res, "res");
 
@@ -45,14 +47,14 @@ const otp = () => {
           "Content-Type": "application/json",
           Accept: "application/json",
           Authorization: `Bearer ${res?.token}`,
-          "x-user-account-type": "tenant"
+          "x-user-account-type": "tenant",
         },
       })
       .then((response) => {
         console.log(response, "res");
         router.push({
           pathname: "/(auth)/signup/profileUpload",
-          params: { res: JSON.stringify(res), user: JSON.stringify(user) },
+          // params: { res: JSON.stringify(res), user: JSON.stringify(user) },
         });
       })
       .catch((err) => {
@@ -64,28 +66,31 @@ const otp = () => {
   };
 
   const resendEmail = async () => {
-    setLoading(true)
+    setLoading(true);
     try {
       const response = await axios.post(
         `${baseurl}/email/resend-verification-token/`,
-        {},  // Empty object for the POST body
+        {}, // Empty object for the POST body
         {
           headers: {
             "Content-Type": "application/json",
             Accept: "application/json",
             Authorization: `Bearer ${res?.token}`,
-            "x-user-account-type": 'tenant',
+            "x-user-account-type": "tenant",
           },
         }
       );
-      if(response.status === 200){
-      console.log("Verification email resent successfully.");
+      if (response.status === 200) {
+        console.log("Verification email resent successfully.");
       }
     } catch (error) {
       console.error("Failed to resend verification email.", error);
-      Alert.alert("Error", "Error sending verification code, please try again...")
-    } finally{
-      setLoading(false)
+      Alert.alert(
+        "Error",
+        "Error sending verification code, please try again..."
+      );
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -126,21 +131,27 @@ const otp = () => {
                       Change Mobile Number
                     </Text>
                     <OtpInput
-                      onChange={handleChange("token")}
+                      onTextChange={handleChange("token")}
                       value={values?.token}
-                      numInputs={4}
-                      inputStyle={{
-                        borderColor: "#FFFFFF5E",
-                        borderWidth: 2,
-                        borderRadius: 15,
-                        width: 80,
-                        height: 80,
-                        color: "#000",
-                        fontSize: 20,
-                        fontWeight: "bold",
-                      }}
+                      focusColor="#F47D7B"
+                      numberOfDigits={4}
                       autoFocus
-                      keyboardType="email-address"
+                      type="alphanumeric"
+                      theme={{
+                        containerStyle: {
+                          width: "100%",
+                          flexDirection: "row",
+                          alignItems: "center",
+                          justifyContent: "space-evenly",
+                        },
+                        pinCodeContainerStyle: {
+                          borderColor: "#3F3F3F24",
+                          borderWidth: 2,
+                          borderRadius: 15,
+                          width: 60,
+                          height: 60,
+                        },
+                      }}
                     />
                     <TouchableOpacity onPress={resendEmail}>
                       <Text className="text-lg text-[#111111] my-2">
@@ -176,7 +187,7 @@ const otp = () => {
 
                 <View className="flex-row items-center justify-center mb-4">
                   <Text>Don’t have an Account? </Text>
-                  <Pressable onPress={() => router.push("/(auth)/signup/")}>
+                  <Pressable onPress={() => router.push("/(auth)")}>
                     <Text className="text-[#F47D7B]">Sign Up here</Text>
                   </Pressable>
                 </View>
@@ -186,12 +197,12 @@ const otp = () => {
         </Formik>
       </KeyboardAvoidingView>
       {loading && (
-      <BottomModal
-        text={"is confirming your verification code"}
-        loading={loading}
-        open = {loading}
-      />
-    )}
+        <BottomModal
+          text={"is confirming your verification code"}
+          loading={loading}
+          open={loading}
+        />
+      )}
     </SafeAreaView>
   );
 };

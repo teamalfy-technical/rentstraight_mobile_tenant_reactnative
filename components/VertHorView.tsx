@@ -43,13 +43,13 @@ const VertHorView = ({ active, item }: any) => {
           </View>
 
           <Text style={{fontFamily: 'montAlt'}} className="text-lg text-white">
-            {item?.address?.city}, {item?.address?.line_1} | {item?.address?.line_2}
+            {item?.city}, {item?.country} | {item?.address}
           </Text>
 
           <View className="flex-row mt-2 space-x-5">
             <View className="flex-row items-center space-x-1">
               <Ionicons name="bed-outline" size={24} color="white" />
-              <Text className="text-white">{item?.stats?.features?.bedrooms}</Text>
+              <Text className="text-white">{item?.bedrooms}</Text>
             </View>
             <View className="flex-row items-center space-x-1">
               <MaterialCommunityIcons
@@ -57,11 +57,11 @@ const VertHorView = ({ active, item }: any) => {
                 size={24}
                 color="white"
               />
-              <Text className="text-white">{item?.stats?.features?.kitchens}</Text>
+              <Text className="text-white">{item?.kitchens}</Text>
             </View>
             <View className="flex-row items-center space-x-1">
               <MaterialCommunityIcons name="shower" size={24} color="white" />
-              <Text className="text-white">{item?.stats?.features?.bathrooms}</Text>
+              <Text className="text-white">{item?.bathrooms}</Text>
             </View>
           </View>
         </View>

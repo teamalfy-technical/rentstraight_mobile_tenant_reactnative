@@ -19,21 +19,20 @@ import axios from "axios";
 import { baseurl } from "@/app/api/baseurl";
 import * as ImageManipulator from "expo-image-manipulator";
 import { Formik, FormikValues } from "formik";
+import { useAuth } from "@/context/AuthContext";
 
 const ProfileUpload = () => {
   const [loading, setLoading] = useState(false);
   const [image, setImage] = useState<String | null>();
+  const { user } = useAuth()
   const params = useLocalSearchParams();
-
-  const res = JSON.parse(params?.res);
-  const user = JSON.parse(params?.user);
-  console.log(res, "response in profileUpload");
+  const res = user;
   const name = res?.full_name;
   const initialValues = {
     photo: "",
-    full_name: res?.full_name,
-    phone_number: user?.phone_number,
-    username: user?.username,
+    // full_name: res?.full_name,
+    // phone_number: user?.phone_number,
+    // username: user?.username,
   };
 
   const pickImage = async () => {
@@ -73,9 +72,9 @@ const ProfileUpload = () => {
       name: "image.jpg",
       type: "image/jpg",
     });
-    formData.append("full_name", values.full_name);
-    formData.append("phone_number", values.phone_number);
-    formData.append("username", values.username);
+    // formData.append("full_name", values.full_name);
+    // formData.append("phone_number", values.phone_number);
+    // formData.append("username", values.username);
 
     if (!image) {
       Alert.alert("Error", "Please select an image");

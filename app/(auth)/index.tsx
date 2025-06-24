@@ -17,7 +17,6 @@ import bg from "@/assets/images/bg2.png";
 // @ts-ignore
 import google from "@/assets/images/google-icon.png";
 import { FontAwesome } from "@expo/vector-icons";
-import { BlurView } from "expo-blur";
 import { router } from "expo-router";
 import { useAuth } from "@/context/AuthContext";
 import { Formik, FormikValues } from "formik";
@@ -31,14 +30,14 @@ const SignIn = () => {
     // router.push('/(tabs)')
   };
   return (
-    <View className="flex-1">
+    <SafeAreaView className="flex-1">
         <ImageBackground
           source={bg}
-          className="flex-1 w-full absolute z-0 right-[-30%] top-14 h-[90%] bg-right"
-          resizeMode="cover"
+          className="flex-1 w-full absolute right-[-30%] top-14 h-[90%]"
+          resizeMode="contain"
+          blurRadius={2}
         />
-      <BlurView intensity={30} tint="regular" style = {{ flex: 1}}>
-        <View className="flex-1 bg-opacity-30 px-5 mt-10">
+        <View className="flex-1 bg-opacity-30 px-5 mt-5">
           <TopBar />
           <KeyboardAvoidingView
             className="flex-1 h-screen"
@@ -150,7 +149,7 @@ const SignIn = () => {
               {/* </View> */}
               <View className="flex-row items-center justify-center mb-10">
                 <Text>Don’t have an Account? </Text>
-                <Pressable onPress={() => router.push("/(auth)/signup/")}>
+                <Pressable onPress={() => router.push("/(auth)/signup")}>
                   <Text
                     style={{ fontFamily: "montAlt" }}
                     className="text-[#F47D7B]"
@@ -162,14 +161,13 @@ const SignIn = () => {
             </ScrollView>
           </KeyboardAvoidingView>
         </View>
-      </BlurView>
       {loading && (
         <BottomModal
           text={"is logging you in, please wait..."}
           loading={loading}
         />
       )}
-    </View>
+    </SafeAreaView>
   );
 };
 

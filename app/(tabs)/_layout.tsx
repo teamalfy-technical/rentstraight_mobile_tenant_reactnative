@@ -21,31 +21,25 @@ export default function TabsLayout() {
     const { user } = useAuth()
   return (
     <Tabs
-      screenOptions={{
-        tabBarActiveTintColor: "#fff",
-        tabBarStyle: {
-          position: "absolute",
-          bottom: Platform.OS === "ios" ? 30 : 10,
-          elevation: 5,
-          width: "90%",
-          paddingHorizontal: 0,
-          paddingVertical: Platform.OS === "ios" ? 50 : 10,
-          left: "5%",
-          right: "5%",
-          borderRadius: 100,
-          backgroundColor: "#412234",
-          height: 80,
-          zIndex: 1000,
-        },
-        tabBarItemStyle: {
-          flex: 1,
-          alignItems: "center",
-          justifyContent: "center", // Changed to 'center'
-          width: "100%",
-          height: "100%", // Ensure full height usage
-        },
-        tabBarHideOnKeyboard: true,
-      }}
+    screenOptions={{
+      headerShown: false,
+      tabBarStyle: {
+        bottom: 35,
+        alignSelf: "center",
+        elevation: 5,
+        width: "90%",
+        borderRadius: 100,
+        backgroundColor: "#412234",
+        paddingVertical: 10,
+        alignItems: "center",
+        height: 80,
+      },
+      tabBarItemStyle: {
+        alignItems: "center",
+        justifyContent: "center",
+      },
+      tabBarHideOnKeyboard: true,
+    }}
     >
       <Tabs.Screen
         name="index"
@@ -56,7 +50,7 @@ export default function TabsLayout() {
                 colors={
                   focused ? ["#F47D7B", "#F47D7B"] : ["#F5E2C8B0", "#8FBFE078"]
                 }
-                style={[styles.iconGradient, styles.homeIconGradient]}
+                style={styles.iconGradient}
               >
                 <Entypo name="home" size={30} color="white" />
               </LinearGradient>
@@ -120,7 +114,7 @@ export default function TabsLayout() {
                 colors={
                   focused ? ["#F47D7B", "#F47D7B"] : ["#F5E2C8B0", "#8FBFE078"]
                 }
-                style={[styles.iconGradient, styles.homeIconGradient]}
+                style={styles.iconGradient}
               >
                 <Ionicons name="settings" size={24} color="white" />
               </LinearGradient>
@@ -184,7 +178,7 @@ export default function TabsLayout() {
                 colors={
                   focused ? ["#F47D7B", "#F47D7B"] : ["#F5E2C8B0", "#8FBFE078"]
                 }
-                style={[styles.iconGradient, styles.homeIconGradient]}
+                style={styles.iconGradient}
               >
                 <MaterialIcons name="favorite" size={24} color="white" />
               </LinearGradient>
@@ -248,7 +242,7 @@ export default function TabsLayout() {
                 colors={
                   focused ? ["#F47D7B", "#F47D7B"] : ["#F5E2C8B0", "#8FBFE078"]
                 }
-                style={[styles.iconGradient, styles.homeIconGradient]}
+                style={styles.iconGradient}
               >
                 <FontAwesome5 name="calendar-day" size={24} color="white" />
               </LinearGradient>
@@ -315,21 +309,22 @@ const styles = StyleSheet.create({
     width: 60,
     height: 60,
     elevation: 5,
-    marginBottom: Platform.OS === "ios" ? 20 : 10,
+    marginVertical: 'auto'
   },
   homeIconContainer: {
-    position: "absolute",
-    top: 0,
-    bottom: 0,
-    left: 0,
+    alignItems: "center",
     justifyContent: "center",
-  },
-  homeIconGradient: {
-    // marginBottom: 0,
-    marginLeft: 15, // Half of the icon's width to make it touch the left edge
-    width: 60,
     height: 60,
+    marginVertical: 'auto',
+    alignSelf: "center",
+    paddingTop: 5
   },
+  // homeIconGradient: {
+  //   // marginBottom: 0,
+  //   marginLeft: 15, // Half of the icon's width to make it touch the left edge
+  //   width: 60,
+  //   height: 60,
+  // },
   calendar: {
     marginRight: -45,
     width: 60,

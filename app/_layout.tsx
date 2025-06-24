@@ -5,6 +5,9 @@ import { useEffect, useCallback } from "react";
 import { NativeBaseProvider, Box } from "native-base";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { AuthProvider } from "@/context/AuthContext";
+import { QueryClientProvider } from "@tanstack/react-query";
+import { queryClient } from "./api/queryClient";
+import { NewAuthProvider } from "@/context/NewAuthContext";
 
 SplashScreen.preventAutoHideAsync(); // Ensure splash screen doesn't hide
 
@@ -28,11 +31,13 @@ export default function RootLayout() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }} onLayout={onLayoutRootView}>
       <NativeBaseProvider>
+        <QueryClientProvider client={queryClient}>
         <AuthProvider>
-          <Stack screenOptions={{ headerShown: false }}>
-            <Stack.Screen name="index" />
-          </Stack>
+          <NewAuthProvider>
+          <Stack screenOptions={{ headerShown: false }} />
+          </NewAuthProvider>
         </AuthProvider>
+        </QueryClientProvider>
       </NativeBaseProvider>
     </GestureHandlerRootView>
   );

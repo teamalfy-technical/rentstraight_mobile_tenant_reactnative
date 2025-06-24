@@ -5,15 +5,17 @@ import { router } from "expo-router";
 import google from "@/assets/images/google-icon.png";
 import { Formik, FormikHandlers, FormikValues } from "formik";
 import axios from "axios";
-import { baseurl } from "@/app/api/baseurl";
+import { baseurl, publicUrl } from "@/app/api/baseurl";
 import UserDetails from "./userDetails";
 import Password from "./password";
 import * as yup from "yup";
+import { useAuth } from "@/context/AuthContext";
 
 const Welcome = () => {
   // const [value, setValue] = useState();
   const [step, setStep] = useState("userDetails");
   const [loading, setLoading] = useState(false);
+  const { setUser } = useAuth()
 
   const initialValues = {
     full_name: "",
@@ -52,7 +54,7 @@ const Welcome = () => {
     console.log(values);
     setLoading(true);
     await axios
-      .post(`${baseurl}/register/`, values, {
+      .post(`${publicUrl}/tenant/register/`, values, {
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
@@ -60,12 +62,13 @@ const Welcome = () => {
       })
       .then((res) => {
         console.log(res.data.data, "response");
+        setUser(res.data.data);
         router.push({
           pathname: "/(auth)/signup/otp",
-          params: {
-            res: JSON.stringify(res.data.data),
-            user: JSON.stringify(values),
-          },
+          // params: {
+          //   res: JSON.stringify(res.data.data),
+          //   user: JSON.stringify(values),
+          // },
         });
       })
       .catch((err) => {
